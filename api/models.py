@@ -1,11 +1,11 @@
 from django.db import models
-from django.utils import timezone
+import datetime
 from django.contrib.auth.models import User
 
 class Quiz(models.Model):
     name = models.CharField(max_length=50)
-    mentor = models.ForeignKey(User, on_delete=models.CASCADE)
-    createdOn = models.DateField(default = timezone.now)
+    mentor = models.ForeignKey(User, related_name="quizes", on_delete=models.CASCADE, null=True)
+    createdOn = models.DateField(default = datetime.date.today)
     q1 = models.TextField(max_length=1000, blank=True)
     a1 = models.CharField(max_length=100, blank=True)
     q2 = models.TextField(max_length=1000, blank=True)
