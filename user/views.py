@@ -16,6 +16,7 @@ class RegisterAPI(generics.GenericAPIView):
         user.is_staff = True
     user.save()
     return Response({
+      "message": "Account created Successfully!",
       "user": UserSerializer(user, context=self.get_serializer_context()).data,
       "token": AuthToken.objects.create(user)[1]
     })
@@ -29,8 +30,13 @@ class LoginAPI(generics.GenericAPIView):
     serializer.is_valid(raise_exception=True)
     user = serializer.validated_data
     _, token = AuthToken.objects.create(user)
+    status = 0
+    if user.is_staff:
+        status = 1
     return Response({
+      "message": "Welcome to QuizBee!",
       "user": UserSerializer(user, context=self.get_serializer_context()).data,
+      "status": status,
       "token": token
     })
 

@@ -10,7 +10,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated,
     ]
 
-    queryset = Quiz.objects.all()
+    queryset = Quiz.objects.all().order_by('-createdOn')
     serializer_class = QuizSerializer
 
     def perform_create(self, serializer):

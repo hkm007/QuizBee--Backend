@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'api',
-    'user',
+    'api.apps.ApiConfig',
+    'user.apps.UserConfig',
     'knox',
     'rest_framework',
     'django.contrib.admin',
